@@ -1,0 +1,32 @@
+{
+  "name": "price-tracking-api",
+  "version": "1.0.0",
+  "description": "Production API for fetching ticker prices via Yahoo Finance with Gemini fallback",
+  "type": "module",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": ["prices", "tickers", "yahoo-finance"],
+  "license": "ISC",
+  "dependencies": {
+    "@google/genai": "^2.2.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "pino": "^9.6.0",
+    "pino-http": "^10.4.0",
+    "yahoo-finance2": "^3.14.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "pino-pretty": "^13.0.0"
+  }
+}

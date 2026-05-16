@@ -15,7 +15,6 @@ provider:
     NODE_ENV: production
     CORS_ORIGIN: ${env:CORS_ORIGIN, '*'}
     MAX_TICKERS_PER_REQUEST: ${env:MAX_TICKERS_PER_REQUEST, '50'}
-    TICKER_FETCH_CONCURRENCY: ${env:TICKER_FETCH_CONCURRENCY, '5'}
 
   httpApi:
     cors:

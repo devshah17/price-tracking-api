@@ -12,7 +12,7 @@ export async function postTickers(req, res) {
 
   const results = await mapWithConcurrency(
     parsed,
-    env.TICKER_FETCH_CONCURRENCY,
+    5, // Hardcoded concurrency limit
     ({ tickerId, currency }) => fetchTickerPrice(tickerId, currency)
   );
 

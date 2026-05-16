@@ -10,7 +10,6 @@ const envSchema = z.object({
   PORT: z.coerce.number().int().positive().default(3002),
   CORS_ORIGIN: z.string().default("*"),
   MAX_TICKERS_PER_REQUEST: z.coerce.number().int().positive().default(50),
-  TICKER_FETCH_CONCURRENCY: z.coerce.number().int().positive().default(5),
 });
 
 const parsed = envSchema.safeParse(process.env);
@@ -21,6 +20,5 @@ if (!parsed.success) {
 }
 
 const env = parsed.data;
-
 
 export { env };

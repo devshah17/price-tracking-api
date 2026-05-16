@@ -32,4 +32,3 @@ jobs:
           # Forward your app environment variables from GitHub Secrets
           CORS_ORIGIN: ${{ secrets.CORS_ORIGIN }}
           MAX_TICKERS_PER_REQUEST: ${{ secrets.MAX_TICKERS_PER_REQUEST }}
-          TICKER_FETCH_CONCURRENCY: ${{ secrets.TICKER_FETCH_CONCURRENCY }}

@@ -44,9 +44,9 @@ functions:
           path: /
           method: ANY
 
-plugins:
-  - serverless-dotenv-plugin
-  - serverless-offline
+# plugins:
+#   - serverless-dotenv-plugin
+#   - serverless-offline
 
 custom:
   serverless-offline:

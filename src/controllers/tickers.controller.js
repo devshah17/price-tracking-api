@@ -2,10 +2,9 @@ import { env } from "../config/env.js";
 import { fetchTickerPrice } from "../services/tickerPrice.service.js";
 import { mapWithConcurrency } from "../utils/mapWithConcurrency.js";
 import { parseTickerInput } from "../utils/parseTickerInput.js";
-import { validatePostTickersBody } from "../validators/tickers.validator.js";
 
 export async function postTickers(req, res) {
-  const { tickers } = validatePostTickersBody(req.body);
+  const tickers = Array.isArray(req.body?.tickers) ? req.body.tickers : [];
 
   const parsed = tickers
     .map(parseTickerInput)

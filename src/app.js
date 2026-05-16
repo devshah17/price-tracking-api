@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import rateLimit from "express-rate-limit";
 import pinoHttp from "pino-http";
 import { env } from "./config/env.js";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
@@ -23,18 +22,6 @@ export function createApp() {
     cors({
       origin: parseCorsOrigin(env.CORS_ORIGIN),
       methods: ["GET", "POST"],
-    })
-  );
-  app.use(
-    rateLimit({
-      windowMs: 60_000,
-      max: env.NODE_ENV === "production" ? 60 : 300,
-      standardHeaders: true,
-      legacyHeaders: false,
-      message: {
-        success: false,
-        error: { code: "RATE_LIMIT", message: "Too many requests" },
-      },
     })
   );
   app.use(

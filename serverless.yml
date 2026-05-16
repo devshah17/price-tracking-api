@@ -1,0 +1,68 @@
+service: price-tracking-api
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ap-south-1 # change to your preferred region
+  stage: ${opt:stage, 'prod'}
+  memorySize: 512 # MB — adjust if Gemini calls need more headroom
+  timeout: 29 # seconds — API Gateway max is 29 s
+  architecture: arm64 # Graviton2 — faster & cheaper for Node workloads
+
+  environment:
+    NODE_ENV: production
+    GEMINI_API_KEY: ${env:GEMINI_API_KEY, ''}
+    CORS_ORIGIN: ${env:CORS_ORIGIN, '*'}
+    MAX_TICKERS_PER_REQUEST: ${env:MAX_TICKERS_PER_REQUEST, '50'}
+    TICKER_FETCH_CONCURRENCY: ${env:TICKER_FETCH_CONCURRENCY, '5'}
+    GEMINI_MODEL: ${env:GEMINI_MODEL, 'gemini-2.0-flash-lite'}
+
+  httpApi:
+    cors:
+      allowedOrigins:
+        - "*"
+      allowedMethods:
+        - GET
+        - POST
+        - OPTIONS
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+        - X-Requested-With
+
+functions:
+  api:
+    handler: src/lambda.handler
+    description: "price-tracking-api — Yahoo Finance + Gemini fallback"
+    events:
+      - httpApi:
+          path: /{proxy+}
+          method: ANY
+      - httpApi:
+          path: /
+          method: ANY
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 3003
+    noPrependStageInUrl: true
+
+package:
+  individually: false
+  patterns:
+    - "!**"
+    - "src/**"
+    - "node_modules/**"
+    - "package.json"
+    - "!node_modules/.cache/**"
+    - "!node_modules/**/test/**"
+    - "!node_modules/**/tests/**"
+    - "!node_modules/**/*.md"
+    - "!node_modules/**/*.ts"
+    - "!**/*.test.js"

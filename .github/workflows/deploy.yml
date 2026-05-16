@@ -30,8 +30,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           # Forward your app environment variables from GitHub Secrets
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           CORS_ORIGIN: ${{ secrets.CORS_ORIGIN }}
           MAX_TICKERS_PER_REQUEST: ${{ secrets.MAX_TICKERS_PER_REQUEST }}
           TICKER_FETCH_CONCURRENCY: ${{ secrets.TICKER_FETCH_CONCURRENCY }}
-          GEMINI_MODEL: ${{ secrets.GEMINI_MODEL }}

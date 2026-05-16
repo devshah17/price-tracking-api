@@ -14,10 +14,13 @@
     "deploy": "serverless deploy",
     "deploy:prod": "serverless deploy --stage prod"
   },
-  "keywords": ["prices", "tickers", "yahoo-finance"],
+  "keywords": [
+    "prices",
+    "tickers",
+    "yahoo-finance"
+  ],
   "license": "ISC",
   "dependencies": {
-    "@google/genai": "^2.2.0",
     "@vendia/serverless-express": "^4.10.4",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",

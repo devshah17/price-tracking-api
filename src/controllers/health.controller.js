@@ -20,6 +20,5 @@ export function getHealth(_req, res) {
 export function getReady(_req, res) {
   res.json({
     status: "ready",
-    geminiConfigured: Boolean(env.GEMINI_API_KEY),
   });
 }

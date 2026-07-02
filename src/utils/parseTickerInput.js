@@ -8,13 +8,16 @@ export function parseTickerInput(item) {
     return tickerId ? { tickerId, currency: null } : null;
   }
 
-  if (item && typeof item === "object" && typeof item.ticker === "string") {
-    const tickerId = item.ticker.trim();
-    const currency =
-      typeof item.currency === "string" && item.currency.trim()
-        ? item.currency.trim().toUpperCase()
-        : null;
-    return tickerId ? { tickerId, currency } : null;
+  if (item && typeof item === "object") {
+    const rawTicker = item.ticker || item.tickerName;
+    if (typeof rawTicker === "string") {
+      const tickerId = rawTicker.trim();
+      const currency =
+        typeof item.currency === "string" && item.currency.trim()
+          ? item.currency.trim().toUpperCase()
+          : null;
+      return tickerId ? { tickerId, currency } : null;
+    }
   }
 
   return null;

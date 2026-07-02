@@ -6,14 +6,12 @@ import { parseTickerInput } from "../utils/parseTickerInput.js";
 export async function postTickers(req, res) {
   const tickers = Array.isArray(req.body?.tickers) ? req.body.tickers : [];
 
-  const parsed = tickers
-    .map(parseTickerInput)
-    .filter(Boolean);
+  const parsed = tickers.map(parseTickerInput).filter(Boolean);
 
   const results = await mapWithConcurrency(
     parsed,
-    5, // Hardcoded concurrency limit
-    ({ tickerId, currency }) => fetchTickerPrice(tickerId, currency)
+    5,
+    ({ tickerId, currency }) => fetchTickerPrice(tickerId, currency),
   );
 
   res.json({ success: true, data: results });
